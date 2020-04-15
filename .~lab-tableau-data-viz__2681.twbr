@@ -589,6 +589,7 @@
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
+      <column datatype='string' name='[Opponent]' role='dimension' type='nominal' />
       <column caption='Oppponent Score' datatype='integer' name='[OppponentScore]' role='measure' type='quantitative' />
       <column caption='Passer Rating' datatype='real' name='[PasserRating]' role='measure' type='quantitative' />
       <column caption='Passing Attempts' datatype='integer' name='[PassingAttempts]' role='measure' type='quantitative' />
@@ -613,8 +614,26 @@
       <column caption='Rushing Touchdowns' datatype='integer' name='[RushingTouchdowns]' role='measure' type='quantitative' />
       <column caption='Rushing Yards' datatype='integer' name='[RushingYards]' role='measure' type='quantitative' />
       <column caption='Team Score' datatype='integer' name='[TeamScore]' role='measure' type='quantitative' />
+      <column datatype='string' name='[Team]' role='dimension' type='nominal' />
       <column datatype='string' name='[Year]' role='dimension' type='nominal' />
       <column-instance column='[Result]' derivation='None' name='[none:Result:nk]' pivot='key' type='nominal' />
+      <group caption='Action (Game Location,Result)' hidden='true' name='[Action (Game Location,Result)]' name-style='unqualified' user:auto-column='sheet_link'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[GameLocation]' />
+          <groupfilter function='level-members' level='[Result]' />
+        </groupfilter>
+      </group>
+      <group caption='Action (Opponent,Team)' hidden='true' name='[Action (Opponent,Team)]' name-style='unqualified' user:auto-column='sheet_link'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[Opponent]' />
+          <groupfilter function='level-members' level='[Team]' />
+        </groupfilter>
+      </group>
+      <group caption='Action (Team)' hidden='true' name='[Action (Team)]' name-style='unqualified' user:auto-column='sheet_link'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[Team]' />
+        </groupfilter>
+      </group>
       <layout dim-ordering='alphabetic' dim-percentage='0.303085' measure-ordering='alphabetic' measure-percentage='0.696915' show-structure='true' user-set-layout='true' />
       <style>
         <style-rule element='mark'>
@@ -650,6 +669,22 @@
         <param name='target' value='Dashboard 1' />
       </command>
     </action>
+    <action caption='Filter 2 (generated)' name='[Action2]'>
+      <activation auto-clear='true' type='on-select' />
+      <source dashboard='Dashboard 1' type='sheet' worksheet='answ10' />
+      <command command='tsc:tsl-filter'>
+        <param name='special-fields' value='all' />
+        <param name='target' value='Dashboard 1' />
+      </command>
+    </action>
+    <action caption='Filter 3 (generated)' name='[Action3]'>
+      <activation auto-clear='true' type='on-select' />
+      <source dashboard='Dashboard 1' type='sheet' worksheet='answ5' />
+      <command command='tsc:tsl-filter'>
+        <param name='special-fields' value='all' />
+        <param name='target' value='Dashboard 1' />
+      </command>
+    </action>
   </actions>
   <worksheets>
     <worksheet name='answ10'>
@@ -659,13 +694,28 @@
             <datasource caption='nfl_football_team_stats' name='federated.1gwmb8f1rlf0is1ci7ygc0b1h926' />
           </datasources>
           <datasource-dependencies datasource='federated.1gwmb8f1rlf0is1ci7ygc0b1h926'>
+            <column caption='Game Location' datatype='string' name='[GameLocation]' role='dimension' type='nominal' />
             <column datatype='string' name='[Opponent]' role='dimension' type='nominal' />
             <column caption='Oppponent Score' datatype='integer' name='[OppponentScore]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Result]' role='dimension' type='nominal' />
             <column datatype='string' name='[Team]' role='dimension' type='nominal' />
             <column-instance column='[OppponentScore]' derivation='Avg' name='[avg:OppponentScore:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Opponent]' derivation='None' name='[none:Opponent:nk]' pivot='key' type='nominal' />
             <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Game Location,Result)]'>
+            <groupfilter function='crossjoin' user:ui-action-filter='[Action3]' user:ui-enumeration='all' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[GameLocation]' />
+              <groupfilter function='level-members' level='[Result]' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Team)]'>
+            <groupfilter function='level-members' level='[Team]' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Team)]</column>
+            <column>[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Game Location,Result)]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style />
@@ -780,11 +830,26 @@
             <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
               <calculation class='tableau' formula='1' />
             </column>
+            <column datatype='string' name='[Opponent]' role='dimension' type='nominal' />
             <column datatype='string' name='[Result]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Team]' role='dimension' type='nominal' />
             <column-instance column='[GameLocation]' derivation='None' name='[none:GameLocation:nk]' pivot='key' type='nominal' />
             <column-instance column='[Result]' derivation='None' name='[none:Result:nk]' pivot='key' type='nominal' />
             <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Opponent,Team)]'>
+            <groupfilter function='crossjoin' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[Opponent]' />
+              <groupfilter function='level-members' level='[Team]' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Team)]'>
+            <groupfilter function='level-members' level='[Team]' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Opponent,Team)]</column>
+            <column>[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Team)]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style />
@@ -1016,6 +1081,8 @@
             <column caption='Defense Interceptions' datatype='integer' name='[DefenseInterceptions]' role='measure' type='quantitative' />
             <column caption='Defense Sacks' datatype='real' name='[DefenseSacks]' role='measure' type='quantitative' />
             <column caption='Defense Safeties' datatype='integer' name='[DefenseSafeties]' role='measure' type='quantitative' />
+            <column caption='Game Location' datatype='string' name='[GameLocation]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Opponent]' role='dimension' type='nominal' />
             <column datatype='string' name='[Result]' role='dimension' type='nominal' />
             <column datatype='string' name='[Team]' role='dimension' type='nominal' />
             <column-instance column='[DefenseInterceptions]' derivation='Avg' name='[avg:DefenseInterceptions:qk]' pivot='key' type='quantitative' />
@@ -1024,11 +1091,25 @@
             <column-instance column='[Result]' derivation='None' name='[none:Result:nk]' pivot='key' type='nominal' />
             <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Game Location,Result)]'>
+            <groupfilter function='crossjoin' user:ui-action-filter='[Action3]' user:ui-enumeration='all' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[GameLocation]' />
+              <groupfilter function='level-members' level='[Result]' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Opponent,Team)]'>
+            <groupfilter function='crossjoin' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[Opponent]' />
+              <groupfilter function='level-members' level='[Team]' />
+            </groupfilter>
+          </filter>
           <filter class='categorical' column='[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[none:Result:nk]'>
-            <groupfilter function='member' level='[none:Result:nk]' member='&quot;Win&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='level-members' level='[none:Result:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[none:Result:nk]</column>
+            <column>[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Opponent,Team)]</column>
+            <column>[federated.1gwmb8f1rlf0is1ci7ygc0b1h926].[Action (Game Location,Result)]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -1376,7 +1457,7 @@
         </viewpoint>
         <viewpoint name='answ9' />
       </viewpoints>
-      <active id='16' />
+      <active id='-1' />
       <simple-id uuid='{A3C2304B-E0B7-4996-B881-0014D82C20B7}' />
     </window>
   </windows>
