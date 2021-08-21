@@ -1,0 +1,39 @@
+
+# Lab | Data Visualization with Tableau
+
+## Challenge 1
+
+1. Open Tableau and import the `nfl_football_team_stats.csv` file.
+
+3. Number of games played per year - 1A
+
+4. Win/loss proportions of each team by year - 1B
+
+5. Win/loss by location - 1C
+The advantage is not significant
+
+6. Points scored team versus opponents - 1D
+
+7. Passing statistics 2016 - 1E
+Minnesota Vikings
+
+8. Percentage Completion by Year - 1F
+
+9. Defensive statistics - 1G
+
+10. Opposite team score by Team - 1H
+
+NFL Team Performance Dashboard:
+https://public.tableau.com/views/NFLFootballteamstats/NFLTeamPerformanceDashboard?:language=pt-BR&publish=yes&:display_count=n&:origin=viz_share_link
+
+
+## Bonus Challenge
+
+- World GDP Per Capita - 1A
+
+- World Population Density by Country - 1B
+
+Dashboard: 
+https://public.tableau.com/views/WorldIndicators_16295571741310/Dashboard1?:language=pt-BR&publish=yes&:display_count=n&:origin=viz_share_link
+
+
