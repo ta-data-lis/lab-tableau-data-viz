@@ -26,6 +26,7 @@ To complete this lab, follow each of the steps below.
     1. You're almost there. However, this visualization is still not "number of games played per year". Why? How to fix the issue?
         * *Hint: read the actual data to figure out why. And modify the Rows formula to fix the issue.*
     1. After you fix the measure, drag it from *Rows* to *Measures* to create a new measure. Rename it to `Number of Games` so that you can reuse it later.
+
 4. Now we want to visualize the win/loss proportions of each team by year using pie charts. Follow the steps below:
     1. Create another worksheet that contains a tabular visualization with the number of records by `Team`. This can be achieved by dragging the `Number of Records` measure to Rows, then dragging the `Team` dimension into the `Number of Records` bar in the visualization panel.
     1. Drag the `Year` and `Result` dimensions into Columns so that we can see the number of wins vs. losses for each team and year.
@@ -34,12 +35,18 @@ To complete this lab, follow each of the steps below.
     1. Change the pie chart colors so that the wins are red and the losses are blue by clicking on *Color* in the *Marks* menu.
     1. Add data labels by dragging the `Number of Records` measure to the Labels square in the *Marks* section.
     1. Change the drop-down selection at the top center of the screen from Standard to Fit Width so that you can see all the win/loss pie charts for a team across years.
+
+
 5. Let's try to determine whether playing at home or away has an impact on how often a team wins.
     - Create a new sheet that contains a side-by-side bar chart showing `Number of Records` by `Result` and `Game Location` (columns). We should be able to see from this visualization that the home team has won approximately 280 more games than the away team over the last several years. Considering the total number of games, do you think this advantage is significant?
+
+
 6. We can determine a team's effectiveness on offense and defense by the number points they score and then number of points their opponents score on the respectively.
     - Create a scatter plot that shows `Average Team Score` (rows) and `Average Opponents Score` (columns) with a different color plot point for each team (drag the Team field to the color box in the Marks section).
     - Also drag the `Team` field to the *Labels* box so that the team names display next to their plot points where possible.
     - You will notice that the plot points are pretty tightly clustered together in the upper right hand corner of the chart. Adjust both axes to start at 16 so that we can get a closer view of the relationships between points scored and points allowed. You can do this by right-clicking on each axis, selecting *Edit Axis*, and setting it to Fixed with a start value of 16.
+
+
 7. Next, we will look at passing statistics in Year 2016, which will show us how strong a team's passing abilities are.
     - Create a new sheet containing a tabular visualization that shows `Passing Attempts` and `Passing Completions`  measures (Columns) by Team (Rows).
     - Filter the data for just 2016 by dragging the Year field into the Filters section and selecting 2016 from the options presented.
@@ -47,15 +54,22 @@ To complete this lab, follow each of the steps below.
         - Note you don't want to change the *Measure* in ***Marks*** because it will change all your meansures including `SUM(Passing Completions)`, `SUM(Passing Attempts)`, and `SUM(Completion Percentage)`. You only want to change `SUM(Completion Percentage)` to `AVG(Completion Percentage)`.
     - Change the number format for the Completion Percentage field to percentage. The procedure is similar to changing its *average* measure in the previous step.
     - Finally, sort your visualization by Average Completion Percentage. Which team in 2016 had the highest percent of pass completions?
+
+
+
 8. Let's look at Percentage Completion as a more interesting visualization than just a table.
     - Create a *treemap* visualization containing labels for Team and Average Completion Percentage.
     - Average Completion Percentage should inform both the size of the boxes and the colors. For the colors, choose the Red-Blue Diverging palette so that teams with high percentages are colored blue and ones with low percentages are colored red.
     - Filter the data for 2017 by dragging the Year field into the Filter section and see how the visualization changes. You can also add a filter box by selecting *Analysis > Filters > Year*. Change the filter to 2016 and then to 2015 using the filter box we just added and note how the visualization changes.
+
+
 9. Let's look at how some defensive statistics - specifically, the average number of sacks, interceptions, and safeties for each team when they win.
     - Start by creating a new sheet containing a tabular visualization showing Average Sacks, Average Interceptions, and Average Safeties by Team (rows). Remember that Tableau will sum each of the measures by default, so you will need to change each measure to display the average instead of the sum. To do this, click on the drop-down arrow for each metric, select *Measure*, and change the selection from *Sum* to *Average*.
     - Filter the data for only games the teams won by by dragging the Result field to the Filters section and selecting Win.
     - Open the Show Me menu in the upper right hand corner of the screen and select the horizontal bar chart option. You should see a set of horizontal bars for each metric we chose for each team.
     - Add labels and colors for each metric by dragging the metric onto the appropriate box within the Marks section. Notice that each metric has it's own subsection within the Marks section, so make sure you are dragging over the appropriate metric.
+
+
 10. Let's create one last visualization that shows how well each team's defense prevents its opponents from scoring.
     - Create a new sheet containing a tabular visualization that shows Opponent Score by Team. Remember that Tableau will sum each of the measures by default, so you will need to change each measure to display the average instead of the sum. To do this, click on the drop-down arrow for this metric, select *Measure*, and change the selection from *Sum* to *Average*. This will show us the average number of points each team has allowed their opponents to score against them.
     - Suppose we wanted to see not only the overall averages but also how widely that varied based on the opposition. We could view this with a box-and-whisker plot visualization. To create one, select box-and-whisker plot from the *Show Me* menu at the top right of the screen.
