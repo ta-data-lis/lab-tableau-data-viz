@@ -1,0 +1,21 @@
+3) Create a calculated field that will divide by 2 the Number of Games, as the issue is that the file is duplicating it, counting the same game by team, so 2 games instead of 1.
+
+
+5)We should be able to see from this visualization that the home team has won approximately 280 more games than the away team over the last several years. Considering the total number of games, do you think this advantage is significant?
+
+Given the percentage, it's not very significative if the team is playing home or away. Play at home increases the change of victory but is not determinant.
+
+
+7) Which team in 2016 had the highest percent of pass completions?
+
+Minnesota Vikings
+
+
+Link to Tableau NFL Stats:
+
+https://public.tableau.com/views/Ironhack-NFLStatsLab/Dashboard1?:language=pt-BR&publish=yes&:display_count=n&:origin=viz_share_link
+
+
+Link to Tableau Bonus challenge:
+
+https://public.tableau.com/views/GDPandPopulationDensity-IronhackLab/Dashboard1?:language=pt-BR&publish=yes&:display_count=n&:origin=viz_share_link
